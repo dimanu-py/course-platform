@@ -1,7 +1,7 @@
 import pytest
 from doublex import Spy, Mimic
 from doublex_expects import have_been_called_with
-from expects import expect
+from expects import expect, raise_error
 
 from src.contexts.backoffice.videos.application.video_creator import VideoCreator
 from src.contexts.backoffice.videos.domain.video_repository import VideoRepository
@@ -24,3 +24,8 @@ class TestVideoCreator:
         self.video_creator(command)
 
         expect(self.repository.save).to(have_been_called_with(video_to_save))
+
+    def test_should_fail_to_create_video_with_invalid_id(self) -> None:
+        command = CreateVideoCommandMother.with_invalid_id()
+
+        expect(lambda: self.video_creator(command)).to(raise_error(ValueError))
