@@ -7,4 +7,4 @@ from src.contexts.backoffice.videos.domain.video import Video
 class VideoMother:
     @classmethod
     def from_request(cls, command: CreateVideoCommand) -> Video:
-        return Video(command.id, command.title, command.description, command.duration)
+        return Video.create(command.id, command.title, command.description)
