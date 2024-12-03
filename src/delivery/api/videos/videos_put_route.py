@@ -1,0 +1,21 @@
+from fastapi import APIRouter, status
+from fastapi.responses import JSONResponse
+
+from src.contexts.backoffice.videos.application.create_video_command import (
+    CreateVideoCommand,
+)
+from src.contexts.backoffice.videos.application.video_creator import VideoCreator
+from src.contexts.backoffice.videos.domain.video_repository import VideoRepository
+from src.delivery.api.videos.video_create_request import CreateVideoRequest
+
+router = APIRouter(prefix="/videos", tags=["Videos"])
+
+
+@router.put("/{_id}")
+async def create_video(_id: str, request: CreateVideoRequest) -> JSONResponse:
+    video_creator = VideoCreator(repository=VideoRepository())
+    command = CreateVideoCommand(_id, request.title, request.description)
+
+    video_creator(command)
+
+    return JSONResponse(status_code=status.HTTP_201_CREATED, content={})
