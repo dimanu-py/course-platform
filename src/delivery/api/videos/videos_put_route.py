@@ -5,7 +5,9 @@ from src.contexts.backoffice.videos.application.create_video_command import (
     CreateVideoCommand,
 )
 from src.contexts.backoffice.videos.application.video_creator import VideoCreator
-from src.contexts.backoffice.videos.domain.video_repository import VideoRepository
+from src.contexts.backoffice.videos.infra.in_memory_video_repository import (
+    InMemoryVideoRepository,
+)
 from src.delivery.api.videos.video_create_request import CreateVideoRequest
 
 router = APIRouter(prefix="/videos", tags=["Videos"])
@@ -13,7 +15,7 @@ router = APIRouter(prefix="/videos", tags=["Videos"])
 
 @router.put("/{_id}")
 async def create_video(_id: str, request: CreateVideoRequest) -> JSONResponse:
-    video_creator = VideoCreator(repository=VideoRepository())
+    video_creator = VideoCreator(repository=InMemoryVideoRepository())
     command = CreateVideoCommand(_id, request.title, request.description)
 
     video_creator(command)
