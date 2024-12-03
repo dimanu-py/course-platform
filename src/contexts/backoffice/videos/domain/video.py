@@ -6,23 +6,23 @@ from src.contexts.backoffice.videos.domain.video_title import VideoTitle
 
 
 class Video:
-    id: VideoId
-    title: VideoTitle
-    description: VideoDescription
+    _id: VideoId
+    _title: VideoTitle
+    _description: VideoDescription
 
     def __init__(
         self,
-        id: VideoId,
+        id_: VideoId,
         title: VideoTitle,
         description: VideoDescription,
     ) -> None:
-        self.description = description
-        self.title = title
-        self.id = id
+        self._description = description
+        self._title = title
+        self._id = id_
 
     @classmethod
-    def create(cls, id: str, title: str, description: str) -> "Video":
-        video_id = VideoId(id)
+    def create(cls, id_: str, title: str, description: str) -> "Video":
+        video_id = VideoId(id_)
         video_title = VideoTitle(title)
         video_description = VideoDescription(description)
         return Video(video_id, video_title, video_description)
@@ -30,3 +30,7 @@ class Video:
     @override
     def __eq__(self, other: "Video") -> bool:
         return self.id == other.id
+
+    @property
+    def id(self) -> VideoId:
+        return self._id
