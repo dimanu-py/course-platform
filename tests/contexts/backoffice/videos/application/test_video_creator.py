@@ -1,5 +1,5 @@
 import pytest
-from doublex import Spy, Mimic
+from doublex import Spy
 from doublex_expects import have_been_called_with
 from expects import expect, raise_error
 
@@ -14,7 +14,7 @@ from tests.contexts.backoffice.videos.domain.video_mother import VideoMother
 @pytest.mark.unit
 class TestVideoCreator:
     def setup_method(self) -> None:
-        self.repository = Mimic(Spy, VideoRepository)
+        self.repository = Spy(VideoRepository)
         self.video_creator = VideoCreator(self.repository)
 
     def test_should_create_a_valid_video(self) -> None:
