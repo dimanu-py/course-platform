@@ -1,11 +1,11 @@
 from fastapi import APIRouter, status
 from fastapi.responses import JSONResponse
 
-from src.contexts.backoffice.videos.application.create_video_command import (
+from src.contexts.content_creation.videos.application.create_video_command import (
     CreateVideoCommand,
 )
-from src.contexts.backoffice.videos.application.video_creator import VideoCreator
-from src.contexts.backoffice.videos.infra.in_memory_video_repository import (
+from src.contexts.content_creation.videos.application.video_creator import VideoCreator
+from src.contexts.content_creation.videos.infra.in_memory_video_repository import (
     InMemoryVideoRepository,
 )
 from src.delivery.api.videos.video_create_request import CreateVideoRequest

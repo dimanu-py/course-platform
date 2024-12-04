@@ -2,7 +2,7 @@ from fastapi import APIRouter, status
 from fastapi.responses import JSONResponse
 
 
-router = APIRouter()
+router = APIRouter(tags=["Health Check"])
 
 
 @router.get("/health-check")

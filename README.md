@@ -78,14 +78,14 @@ and [Domain Driven Design](https://medium.com/@jonathanloscalzo/domain-driven-de
 
 The production code goes inside the [`src`](./src) folder. Which is divided into two main folders:
 - The [`contexts`](./src/contexts) folder will contain all the bounded contexts of the application:
-    - Each [`bounded context`](./src/contexts/backoffice) has the main business logic of a specific domain. 
+    - Each [`bounded context`](./src/contexts/content_creation) has the main business logic of a specific domain. 
     Inside each bounded context you will find one or more modules that represent a specific part of the domain. Each module is divided into 
     the following subfolders:
-      - The [`domain`](src/contexts/backoffice/videos/domain) folder contains the business rules, entities and value objects.
-      - The [`application`](src/contexts/backoffice/videos/application) folder contains use cases and handlers
-      - The [`infra`](src/contexts/backoffice/videos/infra) folder contains the implementation of the interfaces defined in the domain 
+      - The [`domain`](src/contexts/content_creation/videos/domain) folder contains the business rules, entities and value objects.
+      - The [`application`](src/contexts/content_creation/videos/application) folder contains use cases and handlers
+      - The [`infra`](src/contexts/content_creation/videos/infra) folder contains the implementation of the interfaces defined in the domain 
       for I/O operations like database, buses etc.
-        - The [`shared`](src/contexts/backoffice/videos/shared) folder contains code that is shared across multiple modules of the bounded context.
+        - The [`shared`](src/contexts/content_creation/videos/shared) folder contains code that is shared across multiple modules of the bounded context.
     - The [`shared`](src/contexts/shared) folder contains code that is shared across multiple bounded contexts.
 - The [`delivery`](./src/delivery) folder contains the entry points of the application, these would be your API controllers, web frontend, 
 mobile frontend, etc.
@@ -98,9 +98,9 @@ The [`tests`](./tests) folder follows a similar structure to the production code
 - The [`contexts`](./tests/contexts) folder contains the tests for the main business logic of the application. It follows the same structure
 as the production code, separating the bounded contexts into different folders and modules. Each module will contain tests that represent the
 following:
-    - The [`domain`](tests/contexts/backoffice/videos/domain) folder should contain mother objects and tests for the entities and value objects.
-    - The [`application`](tests/contexts/backoffice/videos/application) folder should contain tests for the use cases and handlers.
-    - The [`infra`](tests/contexts/backoffice/videos/infra) folder should contain tests for the implementation of the interfaces defined in the domain.
+    - The [`domain`](tests/contexts/content_creation/videos/domain) folder should contain mother objects and tests for the entities and value objects.
+    - The [`application`](tests/contexts/content_creation/videos/application) folder should contain tests for the use cases and handlers.
+    - The [`infra`](tests/contexts/content_creation/videos/infra) folder should contain tests for the implementation of the interfaces defined in the domain.
 - The [`delivery`](./tests/delivery) folder should contain the acceptance or end-to-end tests.
 
 </details>
