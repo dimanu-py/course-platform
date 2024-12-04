@@ -16,10 +16,10 @@ class InfluencerModuleIntegrationTestConfig:
     influencer = InfluencerMother.create()
 
     def setup_method(self) -> None:
-        self.repository = InMemoryInfluencerRepository()
+        self.in_memory_influencer_repository = InMemoryInfluencerRepository()
 
-    def _should_have(self, influencer: Influencer | None) -> None:
+    def assert_influencer_matches(self, influencer: Influencer | None) -> None:
         expect(influencer).to(equal(self.influencer))
 
-    def _should_not_have(self, influencer: Influencer | None) -> None:
+    def assert_has_not_found(self, influencer: Influencer | None) -> None:
         expect(influencer).to(equal(self._NO_INFLUENCER))
