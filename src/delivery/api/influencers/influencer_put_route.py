@@ -7,9 +7,10 @@ from src.contexts.content_creation.influencers.application.create_influencer_com
 from src.contexts.content_creation.influencers.application.influencer_creator import (
     InfluencerCreator,
 )
-from src.contexts.content_creation.influencers.infra.in_memory_influencer_repository import (
-    InMemoryInfluencerRepository,
+from src.contexts.content_creation.influencers.infra.postgres_influencer_repository import (
+    PostgresInfluencerRepository,
 )
+from src.contexts.shared.infra.persistence.session_maker import SessionMaker
 from src.delivery.api.influencers.influencer_create_request import (
     CreateInfluencerRequest,
 )
@@ -18,7 +19,11 @@ router = APIRouter(prefix="/influencers", tags=["Influencers"])
 
 
 async def creator_provider() -> InfluencerCreator:
-    repository = InMemoryInfluencerRepository()
+    session_maker = SessionMaker(
+        "postgresql://admin:admin@localhost:5432/influencer-platform"
+    )
+    session_maker.create_tables()
+    repository = PostgresInfluencerRepository(session_maker)
     return InfluencerCreator(repository)
 
 
