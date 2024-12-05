@@ -36,3 +36,10 @@ class Video:
     @property
     def id(self) -> VideoId:
         return self._id
+
+    def to_dict(self) -> dict:
+        return {
+            "id": self._id.value,
+            "title": self._title.value,
+            "description": self._description.value,
+        }
