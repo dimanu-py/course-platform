@@ -1,4 +1,4 @@
-from fastapi import APIRouter, status
+from fastapi import APIRouter, status, Depends
 from fastapi.responses import JSONResponse
 
 from src.contexts.content_creation.videos.application.create_video_command import (
@@ -13,9 +13,17 @@ from src.delivery.api.videos.video_create_request import CreateVideoRequest
 router = APIRouter(prefix="/videos", tags=["Videos"])
 
 
+def creator_provider() -> VideoCreator:
+    repository = InMemoryVideoRepository()
+    return VideoCreator(repository)
+
+
 @router.put("/{_id}")
-async def create_video(_id: str, request: CreateVideoRequest) -> JSONResponse:
-    video_creator = VideoCreator(repository=InMemoryVideoRepository())
+async def create_video(
+    _id: str,
+    request: CreateVideoRequest,
+    video_creator: VideoCreator = Depends(creator_provider),
+) -> JSONResponse:
     command = CreateVideoCommand(_id, request.title, request.description)
 
     video_creator(command)
