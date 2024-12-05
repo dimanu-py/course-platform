@@ -5,16 +5,21 @@ from src.contexts.content_creation.videos.application.create_video_command impor
     CreateVideoCommand,
 )
 from src.contexts.content_creation.videos.application.video_creator import VideoCreator
-from src.contexts.content_creation.videos.infra.in_memory_video_repository import (
-    InMemoryVideoRepository,
+from src.contexts.content_creation.videos.infra.postgres_video_repository import (
+    PostgresVideoRepository,
 )
+from src.contexts.shared.infra.persistence.session_maker import SessionMaker
 from src.delivery.api.videos.video_create_request import CreateVideoRequest
 
 router = APIRouter(prefix="/videos", tags=["Videos"])
 
 
 def creator_provider() -> VideoCreator:
-    repository = InMemoryVideoRepository()
+    session_maker = SessionMaker(
+        "postgresql://admin:admin@localhost:5432/influencer-platform"
+    )
+    repository = PostgresVideoRepository(session_maker)
+    session_maker.create_tables()
     return VideoCreator(repository)
 
 
