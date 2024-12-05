@@ -47,3 +47,11 @@ class Influencer:
     @property
     def id(self) -> InfluencerId:
         return self._id
+
+    def to_dict(self) -> dict:
+        return {
+            "id": self._id.value,
+            "name": self._name.value,
+            "username": self._username.value,
+            "email": self._email.value,
+        }
