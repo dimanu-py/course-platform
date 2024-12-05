@@ -1,4 +1,4 @@
-from fastapi import APIRouter, status
+from fastapi import APIRouter, status, Depends
 from fastapi.responses import JSONResponse
 
 from src.contexts.content_creation.influencers.application.create_influencer_command import (
@@ -17,9 +17,17 @@ from src.delivery.api.influencers.influencer_create_request import (
 router = APIRouter(prefix="/influencers", tags=["Influencers"])
 
 
+async def creator_provider() -> InfluencerCreator:
+    repository = InMemoryInfluencerRepository()
+    return InfluencerCreator(repository)
+
+
 @router.put("/{id_}")
-async def create_influencer(id_: str, request: CreateInfluencerRequest) -> JSONResponse:
-    influencer_creator = InfluencerCreator(repository=InMemoryInfluencerRepository())
+async def create_influencer(
+    id_: str,
+    request: CreateInfluencerRequest,
+    influencer_creator: InfluencerCreator = Depends(creator_provider),
+) -> JSONResponse:
     command = CreateInfluencerCommand(
         id_, request.name, request.username, request.email
     )
