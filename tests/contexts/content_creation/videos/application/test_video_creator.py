@@ -1,5 +1,6 @@
 from expects import expect, raise_error
 
+from src.contexts.content_creation.videos.application.video_creator import VideoCreator
 from tests.contexts.content_creation.videos.application.create_video_command_mother import (
     CreateVideoCommandMother,
 )
@@ -10,6 +11,9 @@ from tests.contexts.content_creation.videos.video_module_unit_test_config import
 
 
 class TestVideoCreator(VideoModuleUnitTestConfig):
+    def setup_method(self) -> None:
+        self.video_creator = VideoCreator(self.repository)
+
     def test_should_create_a_valid_video(self) -> None:
         command = CreateVideoCommandMother.with_valid_id()
         video_to_save = VideoMother.from_request(command)
