@@ -1,5 +1,8 @@
 from expects import expect, raise_error
 
+from src.contexts.content_creation.influencers.application.influencer_creator import (
+    InfluencerCreator,
+)
 from src.contexts.content_creation.influencers.domain.invalid_email_format_error import (
     InvalidEmailFormatError,
 )
@@ -15,6 +18,9 @@ from tests.contexts.content_creation.influencers.influencer_module_unit_test_con
 
 
 class TestInfluencerCreator(InfluencerModuleUnitTestConfig):
+    def setup_method(self) -> None:
+        self.influencer_creator = InfluencerCreator(self.repository)
+
     def test_should_create_a_valid_influencer(self) -> None:
         command = CreateInfluencerCommandMother.valid()
         influencer_to_save = InfluencerMother.from_request(command)
