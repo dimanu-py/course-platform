@@ -5,10 +5,10 @@ from src.contexts.content_creation.influencers.domain.influencer_id import Influ
 from src.contexts.content_creation.influencers.domain.influencer_repository import (
     InfluencerRepository,
 )
-from src.contexts.content_creation.influencers.infra.sqlalchemy.influencer_model import (
+from src.contexts.content_creation.influencers.infra.persistence.sqlalchemy.influencer_model import (
     InfluencerModel,
 )
-from src.contexts.shared.infra.persistence.session_maker import (
+from src.contexts.content_creation.shared.infra.sqlalchemy.session_maker import (
     SessionMaker,
 )
 

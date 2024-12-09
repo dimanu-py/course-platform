@@ -1,4 +1,6 @@
-from src.contexts.shared.infra.persistence.sqlalchemy.postgres_base import PostgresBase
+from src.contexts.content_creation.shared.infra.sqlalchemy.postgres_base import (
+    PostgresBase,
+)
 
 from sqlalchemy import Column, UUID, String
 

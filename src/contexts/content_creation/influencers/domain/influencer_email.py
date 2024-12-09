@@ -3,7 +3,7 @@ import re
 from src.contexts.content_creation.influencers.domain.invalid_email_format_error import (
     InvalidEmailFormatError,
 )
-from src.contexts.shared.domain.value_objects.string_value_object import (
+from src.contexts.content_creation.shared.domain.value_objects.string_value_object import (
     StringValueObject,
 )
 

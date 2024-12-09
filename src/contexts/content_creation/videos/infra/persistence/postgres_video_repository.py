@@ -3,8 +3,12 @@ from typing import override
 from src.contexts.content_creation.videos.domain.video import Video
 from src.contexts.content_creation.videos.domain.video_id import VideoId
 from src.contexts.content_creation.videos.domain.video_repository import VideoRepository
-from src.contexts.content_creation.videos.infra.sqlalchemy.video_model import VideoModel
-from src.contexts.shared.infra.persistence.session_maker import SessionMaker
+from src.contexts.content_creation.videos.infra.persistence.sqlalchemy.video_model import (
+    VideoModel,
+)
+from src.contexts.content_creation.shared.infra.sqlalchemy.session_maker import (
+    SessionMaker,
+)
 
 
 class PostgresVideoRepository(VideoRepository):

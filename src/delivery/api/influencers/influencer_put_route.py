@@ -7,10 +7,12 @@ from src.contexts.content_creation.influencers.application.create_influencer_com
 from src.contexts.content_creation.influencers.application.influencer_creator import (
     InfluencerCreator,
 )
-from src.contexts.content_creation.influencers.infra.postgres_influencer_repository import (
+from src.contexts.content_creation.influencers.infra.persistence.postgres_influencer_repository import (
     PostgresInfluencerRepository,
 )
-from src.contexts.shared.infra.persistence.session_maker import SessionMaker
+from src.contexts.content_creation.shared.infra.sqlalchemy.session_maker import (
+    SessionMaker,
+)
 from src.delivery.api.influencers.influencer_create_request import (
     CreateInfluencerRequest,
 )

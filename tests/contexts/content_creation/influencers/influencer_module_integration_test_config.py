@@ -2,16 +2,16 @@ import pytest
 from expects import expect, equal
 
 from src.contexts.content_creation.influencers.domain.influencer import Influencer
-from src.contexts.content_creation.influencers.infra.in_memory_influencer_repository import (
+from src.contexts.content_creation.influencers.infra.persistence.in_memory_influencer_repository import (
     InMemoryInfluencerRepository,
 )
-from src.contexts.content_creation.influencers.infra.postgres_influencer_repository import (
+from src.contexts.content_creation.influencers.infra.persistence.postgres_influencer_repository import (
     PostgresInfluencerRepository,
 )
-from src.contexts.content_creation.influencers.infra.sqlalchemy.influencer_model import (
+from src.contexts.content_creation.influencers.infra.persistence.sqlalchemy.influencer_model import (
     InfluencerModel,
 )
-from src.contexts.shared.infra.persistence.session_maker import (
+from src.contexts.content_creation.shared.infra.sqlalchemy.session_maker import (
     SessionMaker,
 )
 

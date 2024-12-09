@@ -2,14 +2,18 @@ import pytest
 from expects import expect, equal
 
 from src.contexts.content_creation.videos.domain.video import Video
-from src.contexts.content_creation.videos.infra.in_memory_video_repository import (
+from src.contexts.content_creation.videos.infra.persistence.in_memory_video_repository import (
     InMemoryVideoRepository,
 )
-from src.contexts.content_creation.videos.infra.postgres_video_repository import (
+from src.contexts.content_creation.videos.infra.persistence.postgres_video_repository import (
     PostgresVideoRepository,
 )
-from src.contexts.content_creation.videos.infra.sqlalchemy.video_model import VideoModel
-from src.contexts.shared.infra.persistence.session_maker import SessionMaker
+from src.contexts.content_creation.videos.infra.persistence.sqlalchemy.video_model import (
+    VideoModel,
+)
+from src.contexts.content_creation.shared.infra.sqlalchemy.session_maker import (
+    SessionMaker,
+)
 
 
 @pytest.mark.integration

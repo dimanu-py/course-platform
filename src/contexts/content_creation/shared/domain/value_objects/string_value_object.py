@@ -1,10 +1,12 @@
-from src.contexts.shared.domain.exceptions.incorrect_value_type_error import (
+from src.contexts.content_creation.shared.domain.exceptions.incorrect_value_type_error import (
     IncorrectValueTypeError,
 )
-from src.contexts.shared.domain.exceptions.required_value_error import (
+from src.contexts.content_creation.shared.domain.exceptions.required_value_error import (
     RequiredValueError,
 )
-from src.contexts.shared.domain.value_objects.value_object import ValueObject
+from src.contexts.content_creation.shared.domain.value_objects.value_object import (
+    ValueObject,
+)
 
 
 class StringValueObject(ValueObject[str]):
