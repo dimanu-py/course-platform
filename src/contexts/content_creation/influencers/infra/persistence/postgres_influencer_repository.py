@@ -11,37 +11,23 @@ from src.contexts.content_creation.influencers.infra.persistence.sqlalchemy.infl
 from src.contexts.content_creation.shared.infra.sqlalchemy.session_maker import (
     SessionMaker,
 )
+from src.contexts.content_creation.shared.infra.sqlalchemy.sqlalchemy_repository import (
+    SqlAlchemyRepository,
+)
 
 
-class PostgresInfluencerRepository(InfluencerRepository):
+class PostgresInfluencerRepository(
+    SqlAlchemyRepository[InfluencerModel], InfluencerRepository
+):
     _session_maker: SessionMaker
 
     def __init__(self, session_maker: SessionMaker) -> None:
-        self._session_maker = session_maker
+        super().__init__(session_maker=session_maker, model_class=InfluencerModel)
 
     @override
     def save(self, influencer: Influencer) -> None:
-        with self._session_maker.get_session() as session:
-            influencer_to_insert = InfluencerModel(**influencer.to_dict())
-            session.add(influencer_to_insert)
-            session.commit()
+        self.persist(influencer)
 
     @override
     def search(self, influencer_id: InfluencerId) -> Influencer | None:
-        with self._session_maker.get_session() as session:
-            influencer = (
-                session.query(InfluencerModel)
-                .filter(InfluencerModel.id == influencer_id.value)
-                .first()
-            )
-
-            return (
-                Influencer.create(
-                    str(influencer.id),
-                    influencer.name,  # type: ignore
-                    influencer.username,  # type: ignore
-                    influencer.email,  # type: ignore
-                )
-                if influencer
-                else None
-            )
+        return self.search_by_id(influencer_id)

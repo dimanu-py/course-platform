@@ -1,5 +1,7 @@
-from sqlalchemy import Column, UUID, String
+from sqlalchemy import UUID, String
+from sqlalchemy.orm import Mapped, mapped_column
 
+from src.contexts.content_creation.influencers.domain.influencer import Influencer
 from src.contexts.content_creation.shared.infra.sqlalchemy.postgres_base import (
     PostgresBase,
 )
@@ -8,7 +10,15 @@ from src.contexts.content_creation.shared.infra.sqlalchemy.postgres_base import 
 class InfluencerModel(PostgresBase):
     __tablename__ = "influencers"
 
-    id = Column(UUID(as_uuid=True), primary_key=True)
-    name = Column(String, nullable=False)
-    username = Column(String, nullable=False, unique=True)
-    email = Column(String, nullable=False)
+    id: Mapped[UUID] = mapped_column(UUID(as_uuid=True), primary_key=True)
+    name: Mapped[str] = mapped_column(String, nullable=False)
+    username: Mapped[str] = mapped_column(String, nullable=False, unique=True)
+    email: Mapped[str] = mapped_column(String, nullable=False)
+
+    def to_aggregate(self) -> Influencer:
+        return Influencer.create(
+            str(self.id),
+            self.name,
+            self.username,
+            self.email,
+        )
