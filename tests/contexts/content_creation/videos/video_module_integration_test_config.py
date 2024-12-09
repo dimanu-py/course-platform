@@ -8,14 +8,13 @@ from src.contexts.content_creation.videos.infra.in_memory_video_repository impor
 from src.contexts.content_creation.videos.infra.postgres_video_repository import (
     PostgresVideoRepository,
 )
+from src.contexts.content_creation.videos.infra.sqlalchemy.video_model import VideoModel
 from src.contexts.shared.infra.persistence.session_maker import SessionMaker
-from tests.contexts.content_creation.videos.domain.video_mother import VideoMother
 
 
 @pytest.mark.integration
 class VideoModuleIntegrationTestConfig:
     NO_VIDEO = None
-    video = VideoMother.create()
 
     def setup_method(self) -> None:
         self.in_memory_repository = InMemoryVideoRepository()
@@ -26,11 +25,14 @@ class VideoModuleIntegrationTestConfig:
         self.postgres_video_repository = PostgresVideoRepository(self.session_maker)
 
     def teardown_method(self) -> None:
-        self.session_maker.close_session()
-        self.session_maker.drop_tables()
+        with self.session_maker.get_session() as session:
+            session.query(VideoModel).delete()
+            session.commit()
 
-    def assert_video_matches(self, video: Video | None) -> None:
-        expect(video).to(equal(self.video))
+    def assert_videos_match(
+        self, video: Video | None, expected_video: Video | None
+    ) -> None:
+        expect(video).to(equal(expected_video))
 
     def assert_has_not_found(self, video: Video | None) -> None:
         expect(video).to(equal(self.NO_VIDEO))

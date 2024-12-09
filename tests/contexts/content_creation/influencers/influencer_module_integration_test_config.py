@@ -8,18 +8,17 @@ from src.contexts.content_creation.influencers.infra.in_memory_influencer_reposi
 from src.contexts.content_creation.influencers.infra.postgres_influencer_repository import (
     PostgresInfluencerRepository,
 )
+from src.contexts.content_creation.influencers.infra.sqlalchemy.influencer_model import (
+    InfluencerModel,
+)
 from src.contexts.shared.infra.persistence.session_maker import (
     SessionMaker,
-)
-from tests.contexts.content_creation.influencers.domain.influencer_mother import (
-    InfluencerMother,
 )
 
 
 @pytest.mark.integration
 class InfluencerModuleIntegrationTestConfig:
     _NO_INFLUENCER = None
-    influencer = InfluencerMother.create()
 
     def setup_method(self) -> None:
         self.in_memory_influencer_repository = InMemoryInfluencerRepository()
@@ -32,11 +31,14 @@ class InfluencerModuleIntegrationTestConfig:
         )
 
     def teardown_method(self) -> None:
-        self.session_maker.close_session()
-        self.session_maker.drop_tables()
+        with self.session_maker.get_session() as session:
+            session.query(InfluencerModel).delete()
+            session.commit()
 
-    def assert_influencer_matches(self, influencer: Influencer | None) -> None:
-        expect(influencer).to(equal(self.influencer))
+    def assert_influencers_match(
+        self, influencer: Influencer | None, expected_influencer: Influencer | None
+    ) -> None:
+        expect(influencer).to(equal(expected_influencer))
 
     def assert_has_not_found(self, influencer: Influencer | None) -> None:
         expect(influencer).to(equal(self._NO_INFLUENCER))

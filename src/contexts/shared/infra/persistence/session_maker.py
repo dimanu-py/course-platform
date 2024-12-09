@@ -14,11 +14,5 @@ class SessionMaker:
     def get_session(self) -> Session:
         return self._session_maker()
 
-    def close_session(self) -> None:
-        self._engine.dispose()
-
     def create_tables(self) -> None:
         PostgresBase.metadata.create_all(self._engine)
-
-    def drop_tables(self) -> None:
-        PostgresBase.metadata.drop_all(self._engine)
