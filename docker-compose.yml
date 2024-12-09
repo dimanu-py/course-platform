@@ -1,13 +1,13 @@
 services:
   postgres:
     image: postgres:latest
-    container_name: postgres-influencer-platform
+    container_name: postgres-course-platform
     ports:
       - "5432:5432"
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
-      POSTGRES_DB: influencer-platform
+      POSTGRES_DB: course-platform
     volumes:
       - postgres_test_data:/var/lib/postgresql/data
 
