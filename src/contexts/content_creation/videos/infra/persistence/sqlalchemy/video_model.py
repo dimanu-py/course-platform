@@ -1,13 +1,13 @@
 from sqlalchemy import UUID, String
 from sqlalchemy.orm import Mapped, mapped_column
 
-from src.contexts.content_creation.shared.infra.sqlalchemy.postgres_base import (
-    PostgresBase,
+from src.contexts.content_creation.shared.infra.sqlalchemy.base import (
+    Base,
 )
 from src.contexts.content_creation.videos.domain.video import Video
 
 
-class VideoModel(PostgresBase):
+class VideoModel(Base):
     __tablename__ = "videos"
 
     id: Mapped[UUID] = mapped_column(UUID(as_uuid=True), primary_key=True)

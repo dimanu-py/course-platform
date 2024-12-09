@@ -1,8 +1,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
 
-from src.contexts.content_creation.shared.infra.sqlalchemy.postgres_base import (
-    PostgresBase,
+from src.contexts.content_creation.shared.infra.sqlalchemy.base import (
+    Base,
 )
 
 
@@ -15,4 +15,4 @@ class SessionMaker:
         return self._session_maker()
 
     def create_tables(self) -> None:
-        PostgresBase.metadata.create_all(self._engine)
+        Base.metadata.create_all(self._engine)

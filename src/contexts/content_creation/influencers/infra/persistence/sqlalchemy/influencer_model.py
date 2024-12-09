@@ -2,12 +2,12 @@ from sqlalchemy import UUID, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from src.contexts.content_creation.influencers.domain.influencer import Influencer
-from src.contexts.content_creation.shared.infra.sqlalchemy.postgres_base import (
-    PostgresBase,
+from src.contexts.content_creation.shared.infra.sqlalchemy.base import (
+    Base,
 )
 
 
-class InfluencerModel(PostgresBase):
+class InfluencerModel(Base):
     __tablename__ = "influencers"
 
     id: Mapped[UUID] = mapped_column(UUID(as_uuid=True), primary_key=True)
