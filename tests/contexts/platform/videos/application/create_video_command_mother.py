@@ -9,8 +9,12 @@ class CreateVideoCommandMother:
 
     @classmethod
     def with_valid_id(cls) -> CreateVideoCommand:
-        return CreateVideoCommand(cls._VALID_ID, "title", "description")
+        return CreateVideoCommand(
+            id=cls._VALID_ID, title="title", description="description"
+        )
 
     @classmethod
     def with_invalid_id(cls) -> CreateVideoCommand:
-        return CreateVideoCommand(cls._INVALID_ID, "title", "description")
+        return CreateVideoCommand(
+            id=cls._INVALID_ID, title="title", description="description"
+        )

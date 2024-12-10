@@ -22,11 +22,11 @@ router = APIRouter(prefix="/students", tags=["Students"])
 
 async def creator_provider() -> StudentCreator:
     session_maker = SessionMaker(
-        "postgresql://admin:admin@localhost:5432/influencer-platform"
+        url="postgresql://admin:admin@localhost:5432/influencer-platform"
     )
     session_maker.create_tables()
-    repository = PostgresStudentRepository(session_maker)
-    return StudentCreator(repository)
+    repository = PostgresStudentRepository(session_maker=session_maker)
+    return StudentCreator(repository=repository)
 
 
 @router.put("/{id_}")
@@ -35,7 +35,9 @@ async def create_student(
     request: CreateStudentRequest,
     influencer_creator: StudentCreator = Depends(creator_provider),
 ) -> JSONResponse:
-    command = CreateStudentCommand(id_, request.name, request.username, request.email)
+    command = CreateStudentCommand(
+        id_=id_, name=request.name, username=request.username, email=request.email
+    )
 
     influencer_creator(command)
 

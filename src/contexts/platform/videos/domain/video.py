@@ -1,6 +1,6 @@
 from typing import override
 
-from src.contexts.platform.shared.domain.event.domain_event import DomainEvent
+from src.contexts.platform.shared.domain.aggregate_root import AggregateRoot
 from src.contexts.platform.videos.domain.video_created_domain_event import (
     VideoCreatedDomainEvent,
 )
@@ -29,12 +29,15 @@ class Video(AggregateRoot):
 
     @classmethod
     def create(cls, id_: str, title: str, description: str) -> "Video":
-        video_id = VideoId(id_)
-        video_title = VideoTitle(title)
-        video_description = VideoDescription(description)
-        video = Video(video_id, video_title, video_description)
+        video = Video(
+            id_=VideoId(id_),
+            title=VideoTitle(title),
+            description=VideoDescription(description),
+        )
 
-        video.record(VideoCreatedDomainEvent(id_, title, description))
+        video.record(
+            VideoCreatedDomainEvent(id=id_, title=title, description=description)
+        )
 
         return video
 

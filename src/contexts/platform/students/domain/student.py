@@ -32,11 +32,12 @@ class Student:
 
     @classmethod
     def create(cls, id_: str, name: str, username: str, email: str) -> "Student":
-        student_id = StudentId(id_)
-        student_name = StudentName(name)
-        student_username = StudentUsername(username)
-        student_email = StudentEmail(email)
-        return cls(student_id, student_name, student_username, student_email)
+        return cls(
+            id_=StudentId(id_),
+            name=StudentName(name),
+            username=StudentUsername(username),
+            email=StudentEmail(email),
+        )
 
     @override
     def __eq__(self, other: "Student") -> bool:

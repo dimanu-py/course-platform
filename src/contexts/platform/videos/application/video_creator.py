@@ -15,6 +15,8 @@ class VideoCreator:
         self._repository = repository
 
     def __call__(self, command: CreateVideoCommand) -> None:
-        video = Video.create(command.id, command.title, command.description)
+        video = Video.create(
+            id_=command.id, title=command.title, description=command.description
+        )
         self._repository.save(video)
         self._event_bus.publish(video.pull_domain_events())

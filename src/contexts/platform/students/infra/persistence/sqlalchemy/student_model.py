@@ -17,8 +17,8 @@ class StudentModel(Base):
 
     def to_aggregate(self) -> Student:
         return Student.create(
-            str(self.id),
-            self.name,
-            self.username,
-            self.email,
+            id_=str(self.id),
+            name=self.name,
+            username=self.username,
+            email=self.email,
         )

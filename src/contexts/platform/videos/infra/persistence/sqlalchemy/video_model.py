@@ -16,7 +16,7 @@ class VideoModel(Base):
 
     def to_aggregate(self) -> Video:
         return Video.create(
-            str(self.id),
-            self.title,
-            self.description,
+            id_=str(self.id),
+            title=self.title,
+            description=self.description,
         )

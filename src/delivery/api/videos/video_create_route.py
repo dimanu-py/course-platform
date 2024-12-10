@@ -19,21 +19,23 @@ router = APIRouter(prefix="/videos", tags=["Videos"])
 
 def creator_provider() -> VideoCreator:
     session_maker = SessionMaker(
-        "postgresql://admin:admin@localhost:5432/influencer-platform"
+        url="postgresql://admin:admin@localhost:5432/influencer-platform"
     )
-    repository = PostgresVideoRepository(session_maker)
+    repository = PostgresVideoRepository(session_maker=session_maker)
     event_bus = EventBus()
     session_maker.create_tables()
-    return VideoCreator(repository, event_bus)
+    return VideoCreator(repository=repository, event_bus=event_bus)
 
 
 @router.put("/{_id}")
 async def create_video(
-    _id: str,
+    id_: str,
     request: CreateVideoRequest,
     video_creator: VideoCreator = Depends(creator_provider),
 ) -> JSONResponse:
-    command = CreateVideoCommand(_id, request.title, request.description)
+    command = CreateVideoCommand(
+        id=id_, title=request.title, description=request.description
+    )
 
     video_creator(command)
 

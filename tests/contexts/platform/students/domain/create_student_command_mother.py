@@ -12,17 +12,26 @@ class CreateStudentCommandMother:
     @classmethod
     def valid(cls) -> CreateStudentCommand:
         return CreateStudentCommand(
-            cls._VALID_ID, "any_name", "any_username", cls._VALID_EMAIL
+            id_=cls._VALID_ID,
+            name="any_name",
+            username="any_username",
+            email=cls._VALID_EMAIL,
         )
 
     @classmethod
     def invalid_id(cls):
         return CreateStudentCommand(
-            cls._INVALID_ID, "any_name", "any_username", cls._VALID_EMAIL
+            id_=cls._INVALID_ID,
+            name="any_name",
+            username="any_username",
+            email=cls._VALID_EMAIL,
         )
 
     @classmethod
     def invalid_email(cls):
         return CreateStudentCommand(
-            cls._VALID_ID, "any_name", "any_username", cls._INVALID_EMAIL
+            id_=cls._VALID_ID,
+            name="any_name",
+            username="any_username",
+            email=cls._INVALID_EMAIL,
         )
