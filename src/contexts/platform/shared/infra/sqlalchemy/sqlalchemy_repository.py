@@ -9,6 +9,9 @@ Entity = TypeVar("Entity")
 
 
 class SqlAlchemyRepository[Model]:
+    _model_class: Type[Model]
+    _session_maker: SessionMaker
+
     def __init__(self, session_maker: SessionMaker, model_class: Type[Model]) -> None:
         self._session_maker = session_maker
         self._model_class = model_class

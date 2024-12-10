@@ -8,6 +8,8 @@ from src.contexts.platform.students.domain.student_repository import (
 
 
 class StudentCreator:
+    _repository: StudentRepository
+
     def __init__(self, repository: StudentRepository) -> None:
         self._repository = repository
 

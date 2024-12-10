@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, Engine
 from sqlalchemy.orm import sessionmaker, Session
 
 from src.contexts.platform.shared.infra.sqlalchemy.base import (
@@ -7,6 +7,9 @@ from src.contexts.platform.shared.infra.sqlalchemy.base import (
 
 
 class SessionMaker:
+    _session_maker: sessionmaker[Session]
+    _engine: Engine
+
     def __init__(self, url: str) -> None:
         self._engine = create_engine(url)
         self._session_maker = sessionmaker(bind=self._engine)
