@@ -15,7 +15,7 @@ class VideoModel(Base):
     description: Mapped[str] = mapped_column(String, nullable=False)
 
     def to_aggregate(self) -> Video:
-        return Video.create(
+        return Video.from_primitives(
             id_=str(self.id),
             title=self.title,
             description=self.description,

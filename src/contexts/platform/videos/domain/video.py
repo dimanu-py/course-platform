@@ -41,6 +41,14 @@ class Video(AggregateRoot):
 
         return video
 
+    @classmethod
+    def from_primitives(cls, id_: str, title: str, description: str) -> "Video":
+        return Video(
+            id_=VideoId(id_),
+            title=VideoTitle(title),
+            description=VideoDescription(description),
+        )
+
     @override
     def __eq__(self, other: "Video") -> bool:
         return self.id == other.id

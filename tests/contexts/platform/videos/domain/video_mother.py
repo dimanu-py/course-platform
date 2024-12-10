@@ -14,12 +14,14 @@ from tests.contexts.platform.videos.domain.video_title_mother import (
 class VideoMother:
     @classmethod
     def from_request(cls, command: CreateVideoCommand) -> Video:
-        return Video.create(command.id, command.title, command.description)
+        return Video.from_primitives(
+            id_=command.id, title=command.title, description=command.description
+        )
 
     @classmethod
     def create(cls) -> Video:
         return Video(
-            VideoIdMother.create(),
-            VideoTitleMother.create(),
-            VideoDescriptionMother.create(),
+            id_=VideoIdMother.create(),
+            title=VideoTitleMother.create(),
+            description=VideoDescriptionMother.create(),
         )
