@@ -11,8 +11,7 @@ from src.contexts.platform.videos.domain.video_id import VideoId
 from src.contexts.platform.videos.domain.video_title import VideoTitle
 
 
-class Video:
-    _domain_events: list[DomainEvent]
+class Video(AggregateRoot):
     _id: VideoId
     _title: VideoTitle
     _description: VideoDescription
@@ -23,7 +22,7 @@ class Video:
         title: VideoTitle,
         description: VideoDescription,
     ) -> None:
-        self._domain_events = []
+        super().__init__()
         self._description = description
         self._title = title
         self._id = id_
@@ -53,12 +52,3 @@ class Video:
             "title": self._title.value,
             "description": self._description.value,
         }
-
-    def record(self, event: VideoCreatedDomainEvent) -> None:
-        self._domain_events.append(event)
-
-    def pull_domain_events(self) -> list[DomainEvent]:
-        recorded_domain_events = self._domain_events
-        self._domain_events = []
-
-        return recorded_domain_events
