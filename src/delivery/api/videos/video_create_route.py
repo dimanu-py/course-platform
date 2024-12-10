@@ -1,6 +1,7 @@
 from fastapi import APIRouter, status, Depends
 from fastapi.responses import JSONResponse
 
+from src.contexts.platform.shared.domain.event.event_bus import EventBus
 from src.contexts.platform.videos.application.create_video_command import (
     CreateVideoCommand,
 )
@@ -21,8 +22,9 @@ def creator_provider() -> VideoCreator:
         "postgresql://admin:admin@localhost:5432/influencer-platform"
     )
     repository = PostgresVideoRepository(session_maker)
+    event_bus = EventBus()
     session_maker.create_tables()
-    return VideoCreator(repository)
+    return VideoCreator(repository, event_bus)
 
 
 @router.put("/{_id}")
