@@ -27,7 +27,7 @@ def creator_provider() -> VideoCreator:
     return VideoCreator(repository=repository, event_bus=event_bus)
 
 
-@router.put("/{_id}")
+@router.put("/{id_}")
 async def create_video(
     id_: str,
     request: CreateVideoRequest,
