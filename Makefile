@@ -55,7 +55,7 @@ add-dep:
 
 .PHONY: check-typing
 check-typing:
-	pdm run mypy .
+	pdm run mypy src tests
 
 .PHONY: check-lint
 check-lint:
@@ -82,3 +82,7 @@ pre-push: all-integration all-acceptance
 .PHONY: watch
 watch:
 	pdm run ptw --runner "pytest -n auto tests -ra"
+
+.PHONY: create-aggregate
+create-aggregate:
+	pdm run python -m scripts.create_aggregate
