@@ -1,10 +1,21 @@
-from src.contexts.platform.videos.domain.video import Video
 from src.contexts.platform.videos.domain.video_created_domain_event import (
     VideoCreatedDomainEvent,
 )
+from tests.contexts.platform.videos.domain.video_description_mother import (
+    VideoDescriptionMother,
+)
+from tests.contexts.platform.videos.domain.video_id_mother import VideoIdMother
+from tests.contexts.platform.videos.domain.video_title_mother import VideoTitleMother
 
 
 class VideoCreatedDomainEventMother:
     @classmethod
-    def from_video(cls, video: Video) -> VideoCreatedDomainEvent:
-        return VideoCreatedDomainEvent(**video.to_dict())
+    def create(cls, params: dict | None = None) -> VideoCreatedDomainEvent:
+        primitives = {
+            "id": VideoIdMother.create().value,
+            "title": VideoTitleMother.create().value,
+            "description": VideoDescriptionMother.create().value,
+            **(params if params else {}),
+        }
+
+        return VideoCreatedDomainEvent(**primitives)

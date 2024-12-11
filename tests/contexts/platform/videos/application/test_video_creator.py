@@ -20,7 +20,7 @@ class TestVideoCreator(VideoModuleUnitTestConfig):
     def test_should_create_a_valid_video(self) -> None:
         command = CreateVideoCommandMother.with_valid_id()
         video_to_save = VideoMother.from_request(command)
-        domain_event = VideoCreatedDomainEventMother.from_video(video_to_save)
+        domain_event = VideoCreatedDomainEventMother.create(video_to_save.to_dict())
 
         self.video_creator(command)
 
