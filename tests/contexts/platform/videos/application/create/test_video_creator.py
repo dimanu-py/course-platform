@@ -1,7 +1,7 @@
 from expects import expect, raise_error
 
-from src.contexts.platform.videos.application.video_creator import VideoCreator
-from tests.contexts.platform.videos.application.create_video_command_mother import (
+from src.contexts.platform.videos.application.create.video_creator import VideoCreator
+from tests.contexts.platform.videos.application.create.create_video_command_mother import (
     CreateVideoCommandMother,
 )
 from tests.contexts.platform.videos.domain.video_created_domain_event_mother import (

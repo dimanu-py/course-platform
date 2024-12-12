@@ -1,12 +1,12 @@
 from expects import expect, raise_error
 
-from src.contexts.platform.students.application.student_creator import (
+from src.contexts.platform.students.application.create.student_creator import (
     StudentCreator,
 )
 from src.contexts.platform.students.domain.invalid_email_format_error import (
     InvalidEmailFormatError,
 )
-from tests.contexts.platform.students.domain.create_student_command_mother import (
+from tests.contexts.platform.students.application.create.create_student_command_mother import (
     CreateStudentCommandMother,
 )
 from tests.contexts.platform.students.domain.student_mother import (

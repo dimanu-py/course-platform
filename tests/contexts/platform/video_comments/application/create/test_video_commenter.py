@@ -1,7 +1,7 @@
-from src.contexts.platform.video_comments.application.video_commenter import (
+from src.contexts.platform.video_comments.application.create.video_commenter import (
     VideoCommenter,
 )
-from tests.contexts.platform.video_comments.application.video_comment_command_mother import (
+from tests.contexts.platform.video_comments.application.create.video_comment_command_mother import (
     VideoCommentCommandMother,
 )
 from tests.contexts.platform.video_comments.domain.video_comment_created_domain_event_mother import (

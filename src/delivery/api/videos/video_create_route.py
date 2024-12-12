@@ -2,10 +2,10 @@ from fastapi import APIRouter, status, Depends
 from fastapi.responses import JSONResponse
 
 from src.contexts.platform.shared.domain.event.event_bus import EventBus
-from src.contexts.platform.videos.application.create_video_command import (
+from src.contexts.platform.videos.application.create.create_video_command import (
     CreateVideoCommand,
 )
-from src.contexts.platform.videos.application.video_creator import VideoCreator
+from src.contexts.platform.videos.application.create.video_creator import VideoCreator
 from src.contexts.platform.videos.infra.persistence.postgres_video_repository import (
     PostgresVideoRepository,
 )

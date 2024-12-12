@@ -1,4 +1,4 @@
-from src.contexts.platform.students.application.create_student_command import (
+from src.contexts.platform.students.application.create.create_student_command import (
     CreateStudentCommand,
 )
 

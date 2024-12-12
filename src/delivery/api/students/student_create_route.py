@@ -1,10 +1,10 @@
 from fastapi import APIRouter, status, Depends
 from fastapi.responses import JSONResponse
 
-from src.contexts.platform.students.application.create_student_command import (
+from src.contexts.platform.students.application.create.create_student_command import (
     CreateStudentCommand,
 )
-from src.contexts.platform.students.application.student_creator import (
+from src.contexts.platform.students.application.create.student_creator import (
     StudentCreator,
 )
 from src.contexts.platform.students.infra.persistence.postgres_student_repository import (

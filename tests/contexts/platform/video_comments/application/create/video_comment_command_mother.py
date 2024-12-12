@@ -1,4 +1,4 @@
-from src.contexts.platform.video_comments.application.video_comment_command import (
+from src.contexts.platform.video_comments.application.create.video_comment_command import (
     VideoCommentCommand,
 )
 from tests.contexts.platform.students.domain.student_id_mother import StudentIdMother

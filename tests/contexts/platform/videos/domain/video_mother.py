@@ -1,4 +1,4 @@
-from src.contexts.platform.videos.application.create_video_command import (
+from src.contexts.platform.videos.application.create.create_video_command import (
     CreateVideoCommand,
 )
 from src.contexts.platform.videos.domain.video import Video

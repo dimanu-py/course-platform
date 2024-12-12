@@ -1,4 +1,4 @@
-from src.contexts.platform.video_comments.application.video_comment_command import (
+from src.contexts.platform.video_comments.application.create.video_comment_command import (
     VideoCommentCommand,
 )
 from src.contexts.platform.video_comments.domain.video_comment import VideoComment
