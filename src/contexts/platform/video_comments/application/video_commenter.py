@@ -1,3 +1,4 @@
+from src.contexts.platform.shared.domain.event.event_bus import EventBus
 from src.contexts.platform.video_comments.application.video_comment_command import (
     VideoCommentCommand,
 )
@@ -8,9 +9,11 @@ from src.contexts.platform.video_comments.domain.video_comment_repository import
 
 
 class VideoCommenter:
+    _event_bus: EventBus
     _repository: VideoCommentRepository
 
-    def __init__(self, repository: VideoCommentRepository) -> None:
+    def __init__(self, repository: VideoCommentRepository, event_bus: EventBus) -> None:
+        self._event_bus = event_bus
         self._repository = repository
 
     def __call__(self, command: VideoCommentCommand) -> None:
@@ -23,3 +26,4 @@ class VideoCommenter:
         )
 
         self._repository.save(video_comment)
+        self._event_bus.publish(video_comment.pull_domain_events())

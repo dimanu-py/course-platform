@@ -2,6 +2,9 @@ from typing import override
 
 from src.contexts.platform.shared.domain.aggregate_root import AggregateRoot
 from src.contexts.platform.students.domain.student_id import StudentId
+from src.contexts.platform.video_comments.domain.video_comment_created_domain_event import (
+    VideoCommentCreatedDomainEvent,
+)
 from src.contexts.platform.video_comments.domain.video_comment_id import VideoCommentId
 from src.contexts.platform.video_comments.domain.video_comment_title import (
     VideoCommentTitle,
@@ -35,13 +38,25 @@ class VideoComment(AggregateRoot):
     def create(
         cls, id_: str, video_id: str, author_id: str, title: str, content: str
     ) -> "VideoComment":
-        return VideoComment(
+        video_comment = VideoComment(
             id_=VideoCommentId(id_),
             video_id=VideoId(video_id),
             author_id=StudentId(author_id),
             title=VideoCommentTitle(title),
             content=VideoCommentTitle(content),
         )
+
+        video_comment.record(
+            VideoCommentCreatedDomainEvent(
+                id=id_,
+                video_id=video_id,
+                author_id=author_id,
+                title=title,
+                content=content,
+            )
+        )
+
+        return video_comment
 
     @override
     def __eq__(self, other: "VideoComment") -> bool:
