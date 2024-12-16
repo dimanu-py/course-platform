@@ -1,7 +1,7 @@
 from sqlalchemy import UUID, String
 from sqlalchemy.orm import Mapped, mapped_column
 
-from src.contexts.platform.shared.infra.sqlalchemy.base import (
+from src.contexts.platform.shared.infra.persistence.sqlalchemy.base import (
     Base,
 )
 from src.contexts.platform.videos.domain.video import Video

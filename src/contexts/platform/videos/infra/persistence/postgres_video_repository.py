@@ -1,6 +1,6 @@
 from typing import override
 
-from src.contexts.platform.shared.infra.sqlalchemy.sqlalchemy_repository import (
+from src.contexts.platform.shared.infra.persistence.sqlalchemy.sqlalchemy_repository import (
     SqlAlchemyRepository,
 )
 from src.contexts.platform.videos.domain.video import Video
@@ -9,7 +9,7 @@ from src.contexts.platform.videos.domain.video_repository import VideoRepository
 from src.contexts.platform.videos.infra.persistence.sqlalchemy.video_model import (
     VideoModel,
 )
-from src.contexts.platform.shared.infra.sqlalchemy.session_maker import (
+from src.contexts.platform.shared.infra.persistence.sqlalchemy.session_maker import (
     SessionMaker,
 )
 

@@ -9,7 +9,7 @@ from src.contexts.platform.videos.application.create.video_creator import VideoC
 from src.contexts.platform.videos.infra.persistence.postgres_video_repository import (
     PostgresVideoRepository,
 )
-from src.contexts.platform.shared.infra.sqlalchemy.session_maker import (
+from src.contexts.platform.shared.infra.persistence.sqlalchemy.session_maker import (
     SessionMaker,
 )
 from src.delivery.api.videos.video_create_request import CreateVideoRequest

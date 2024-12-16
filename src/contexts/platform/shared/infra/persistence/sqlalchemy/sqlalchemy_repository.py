@@ -1,8 +1,8 @@
 from typing import Type, TypeVar
 
 from src.contexts.platform.shared.domain.value_objects.uuid import Uuid
-from src.contexts.platform.shared.infra.sqlalchemy.base import Base
-from src.contexts.platform.shared.infra.sqlalchemy.session_maker import (
+from src.contexts.platform.shared.infra.persistence.sqlalchemy.base import Base
+from src.contexts.platform.shared.infra.persistence.sqlalchemy.session_maker import (
     SessionMaker,
 )
 

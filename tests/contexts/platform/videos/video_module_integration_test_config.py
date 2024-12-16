@@ -11,7 +11,7 @@ from src.contexts.platform.videos.infra.persistence.postgres_video_repository im
 from src.contexts.platform.videos.infra.persistence.sqlalchemy.video_model import (
     VideoModel,
 )
-from src.contexts.platform.shared.infra.sqlalchemy.session_maker import (
+from src.contexts.platform.shared.infra.persistence.sqlalchemy.session_maker import (
     SessionMaker,
 )
 

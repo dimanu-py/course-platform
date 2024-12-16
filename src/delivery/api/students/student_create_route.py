@@ -10,7 +10,7 @@ from src.contexts.platform.students.application.create.student_creator import (
 from src.contexts.platform.students.infra.persistence.postgres_student_repository import (
     PostgresStudentRepository,
 )
-from src.contexts.platform.shared.infra.sqlalchemy.session_maker import (
+from src.contexts.platform.shared.infra.persistence.sqlalchemy.session_maker import (
     SessionMaker,
 )
 from src.delivery.api.students.student_create_request import (
