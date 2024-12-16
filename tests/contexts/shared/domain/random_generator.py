@@ -27,3 +27,7 @@ class RandomGenerator:
     @classmethod
     def email(cls) -> str:
         return cls.faker.email()
+
+    @classmethod
+    def number(cls) -> int:
+        return cls.faker.random_int(min=0)
