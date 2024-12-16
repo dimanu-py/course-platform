@@ -16,3 +16,7 @@ class Uuid(ValueObject[str]):
         if value is None:
             raise RequiredValueError
         UUID(value)
+
+    @classmethod
+    def generate(cls) -> str:
+        return str(UUID(int=0))
