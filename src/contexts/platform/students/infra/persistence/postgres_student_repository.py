@@ -8,10 +8,10 @@ from src.contexts.platform.students.domain.student_repository import (
 from src.contexts.platform.students.infra.persistence.sqlalchemy.student_model import (
     StudentModel,
 )
-from src.contexts.platform.shared.infra.sqlalchemy.session_maker import (
+from src.contexts.platform.shared.infra.persistence.sqlalchemy.session_maker import (
     SessionMaker,
 )
-from src.contexts.platform.shared.infra.sqlalchemy.sqlalchemy_repository import (
+from src.contexts.platform.shared.infra.persistence.sqlalchemy.sqlalchemy_repository import (
     SqlAlchemyRepository,
 )
 

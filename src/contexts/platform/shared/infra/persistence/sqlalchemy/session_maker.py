@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine, Engine
 from sqlalchemy.orm import sessionmaker, Session
 
-from src.contexts.platform.shared.infra.sqlalchemy.base import (
+from src.contexts.platform.shared.infra.persistence.sqlalchemy.base import (
     Base,
 )
 
