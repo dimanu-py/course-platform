@@ -1,21 +1,13 @@
 <div align="center">
-  <h1>⚡️ Instant Boilerplate for Python DDD SaaS ⚡️</h1>
-  <strong>Start your Python project right away</strong>
+  <h1>⚡️ DDD Course Platform Pet Project ⚡️</h1>
 </div>
 
 <p align="center">
   <a href="#requirements">Requirements</a>&nbsp;&nbsp;•&nbsp;
-  <a href="#folders">Folder Structure</a>&nbsp;&nbsp;•&nbsp;
-  <a href="#use">How To Use</a>&nbsp;&nbsp;•&nbsp;
-  <a href="#commands">Commands</a>&nbsp;&nbsp;•&nbsp;
-  <a href="#packages">Dependencies</a>
+  <a href="#use">Set up the Project</a>&nbsp;&nbsp;•&nbsp;
+  <a href="#postgres">PostgresSQL</a>&nbsp;&nbsp;•&nbsp;
+  <a href="#rabbitmq">RabbitMQ</a>
 </p>
-
-## Resources
-
-This template is inspired by pmareke repository. You can find his template in the link bellow:
-
-[![Web](https://img.shields.io/badge/GitHub-pmareke-14a1f0?style=for-the-badge&logo=github&logoColor=white&labelColor=101010)](https://github.com/pmareke/fastapi-boilerplate)
 
 <a name=requirements></a>
 ## Requirements
@@ -68,113 +60,234 @@ To install directly all dependencies, run:
 make install
 ```
 
-<a name=folders></a>
-## Folder Structure
-
-The project is structured following the [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) principles
-and [Domain Driven Design](https://medium.com/@jonathanloscalzo/domain-driven-design-principios-beneficios-y-elementos-primera-parte-aad90f30aa35).
-
-<details><summary>Production Code</summary>
-
-The production code goes inside the [`src`](./src) folder. Which is divided into two main folders:
-- The [`contexts`](./src/contexts) folder will contain all the bounded contexts of the application:
-    - Each [`bounded context`](./src/contexts/platform) has the main business logic of a specific domain. 
-    Inside each bounded context you will find one or more modules that represent a specific part of the domain. Each module is divided into 
-    the following subfolders:
-      - The [`domain`](src/contexts/platform/videos/domain) folder contains the business rules, entities and value objects.
-      - The [`application`](src/contexts/platform/videos/application) folder contains use cases and handlers
-      - The [`infra`](src/contexts/platform/videos/infra) folder contains the implementation of the interfaces defined in the domain 
-      for I/O operations like database, buses etc.
-        - The [`shared`](src/contexts/platform/videos/shared) folder contains code that is shared across multiple modules of the bounded context.
-    - The [`shared`](src/contexts/shared) folder contains code that is shared across multiple bounded contexts.
-- The [`delivery`](./src/delivery) folder contains the entry points of the application, these would be your API controllers, web frontend, 
-mobile frontend, etc.
-
-</details>
-
-<details><summary>Tests</summary>
-
-The [`tests`](./tests) folder follows a similar structure to the production code.
-- The [`contexts`](./tests/contexts) folder contains the tests for the main business logic of the application. It follows the same structure
-as the production code, separating the bounded contexts into different folders and modules. Each module will contain tests that represent the
-following:
-    - The [`domain`](tests/contexts/platform/videos/domain) folder should contain mother objects and tests for the entities and value objects.
-    - The [`application`](tests/contexts/platform/videos/application) folder should contain tests for the use cases and handlers.
-    - The [`infra`](tests/contexts/platform/videos/infra) folder should contain tests for the implementation of the interfaces defined in the domain.
-- The [`delivery`](./tests/delivery) folder should contain the acceptance or end-to-end tests.
-
-</details>
-
-<details><summary>Utilities</summary>
-
-Inside [`scripts`](./scripts) folder you can put any script utility like hooks, pre-defined commands etc.
-
-By default, you would find:
-1. Scripts with git hooks inside the [`hooks`](./scripts/hooks) folder.
-2. Scripts to run specific tests inside the [`test`](./scripts/test) folder.
-3. Common scripts at the root of the [`scripts`](./scripts) folder.
-
-</details>
-
 <a name=use></a>
-## How To Use
+## Set up the Project
 
-In order to use this template and start your project follow these steps:
+In order to set up the project, you need to follow the steps below:
 
-1. From this template on GitHub click on the "Use this template" button and select "Create a new repository".
-   This will open a new page where you can name your repository and select the visibility.
-2. Clone your repository on you local machine
+1. Clone the repository on you local machine
     ```bash
-   git clone <your_repo_url>
+   git clone <repo_url>
    ```
-3. Run the `make local-setup` command to be able to run the hooks inside [hooks](./scripts/hooks) folder.
+2. Run the `make local-setup` command to be able to run the hooks inside [hooks](./scripts/hooks) folder.
 
 > [!NOTE]
 > If you want to ignore the hooks folder, you can remove it and just run `make install` command.
 
-4. Rename the [source bounded context](./src/contexts) as well as [tests bounded context](./tests/contexts)
-5. Happy coding
+3. Run infra containers declared in the [docker-compose.yml](./docker-compose.yml) file:
+    ```bash
+    docker-compose up -d
+    ```
+4. Run the tests to check if everything is working:
+    ```bash
+    make test
+    ```
 
-<a name=commands></a>
-## Make Commands
+<a name=postgres></a>
+## PostgresSQL
 
-The project leverages lots of actions to a [Makefile](./Makefile). The following commands are available by default:
-- `test`: runs all the tests
-- `unit`: detects changes on domain or application changes and runs the bounding context corresponding tests
-- `all-unit`: runs all domain and application tests in all bounded contexts. **These tests must be marked as unit tests**
-- `integration`: detects changes on infra and runs the bounding context corresponding tests
-- `all-integration`: runs all infra tests in all bounded contexts. **These tests must be marked as integration tests**
-- `acceptance`: runs all acceptance tests
-- `coverage`: runs all the tests with coverage
-- `local-setup`: sets up the local environment
-- `install`: installs all dependencies
-- `update`: updates dependencies
-- `add-dep`: installs a new dependency. Asks for the dependency name and if it's a dev dependency or not.
-- `check-typing`: runs static type checking with mypy
-- `check-lint`: checks linting with ruff
-- `lint`: lints the code with ruff
-- `check-format`: check formats with ruff
-- `format`: formats the code with ruff
-- `pre-commit`: runs the pre-commit checks (check types, checks linting, checks format and runs all unit tests)
-- `pre-push`: runs integration and acceptance tests
-- `watch`: runs a watch session to run all the tests on file changes
+@TODO 
 
-<a name=packages></a>
-## Default Dependencies
+<a name=event-sourcing></a>
+## RabbitMQ
 
-The project uses [pdm](https://github.com/pdm-project/pdm) as package manager. When you run the `make install` or `make local-setup` command,
-it will install the following dependencies. You can check the versions in the [pyproject.toml](./pyproject.toml) file.
+<details><summary>Python tutorial</summary>
 
-### Testing
+- [`Producers`](#producers) publish messages to [`exchanges`](#exchanges).
+- The [`exchanges`](#exchanges) takes those messages and route them to [`queues`](#queues).
+- [`Exchanges`](#exchanges) distribute the messages to the [`queues`](#queues) based on the [`bindings`](#bindings).
+- The [`consumers`](#consumers) are subscribed to [`queues`](#queues) and consume the messages from them.
 
-- [pytest](https://docs.pytest.org/en/stable/): testing runner.
-- [pytest-xdist](https://pypi.org/project/pytest-xdist/): pytest plugin to run the tests in parallel.
-- [expects](https://pypi.org/project/expects/): an expressive assertion library for Python.
-- [doublex](https://pypi.org/project/doublex/): a test doubles library for Python.
-- [doublex-expects](https://pypi.org/project/doublex-expects/): a plugin for doublex that integrates with expects.
+<a name=exchanges></a>
+### Exchanges
 
-### Code style
+> They are responsible for getting [`producers`](#producers) messages and routing them to the [`queues`](#queues).
 
-- [mypy](https://github.com/python/mypy): a static type checker.
-- [yapf](https://github.com/google/yapf): a Python formatter.
-- [ruff](https://github.com/astral-sh/ruff): a Python linter and formatter.
+Exchanges can be configured with different attributes:
+
+- `exchange`: The name of the exchange. If not set, a random exchange name will be generated.
+- `durable`: If set to `True` the exchange will survive server restarts, otherwise it will be deleted.
+- `auto_doelete`: If set to `True` the exchange will be deleted when no queues are bound to it.
+- `exchange_type`: The type of the exchange. The default is `direct`, but there are other types like `fanout`, `topic`.
+    - `'direct'`: The message is routed to the queues whose binding key exactly matches the routing key of the message.
+    - `'fanout'`: The message is routed to all the queues bound to the exchange. Here routing key is ignored.
+    - `'topic'`: The message is routed to the queues whose binding key matches the routing key of the message.
+
+To create a new exchange we need to run the following command:
+
+```python
+import pika
+
+
+connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+channel = connection.channel()
+
+channel.exchange_declare(
+    exchange="videos",
+    exchange_type="topic"
+)
+```
+
+<a name=queues></a>
+### Queues
+
+> They store messages until they are consumed by the [`consumers`](#consumers).
+
+Queues can be configured with different attributes:
+- `queue`: The name of the queue. If not set, a random queue name will be generated.
+- `durable`: If set to `True` the queue will survive server restarts, otherwise it will be deleted.
+- `exclusive`: If set to `True` the queue will be used by only one connection and will be deleted when the connection closes.
+- `auto_delete`: If set to `True` the queue will be deleted when no consumers are connected to it.
+
+To create a new queue we need to run the following command:
+
+```python
+channel.queue_declare(
+    queue="users.send_email_on_video_created",
+    durable=True,
+    exclusive=True
+)
+```
+
+> Creating queues are idempotent operations, so we can run the same command multiple times without any side effects.
+> If we don't know who will create the queue first, we can create it in the [`producer`](#producers) and [`consumer`](#consumers) code.
+
+<a name=bindings></a>
+### Bindings
+
+> They are the link between the [`exchanges`](#exchanges) and the [`queues`](#queues).
+
+To let the [`exchange`](#exchanges) know where to send the messages we need to create a [`binding`](#bindings) between the [`exchange`](#exchanges) 
+and the [`queues`](#queues).
+
+```python
+channel.queue_bind(
+    exchange="videos",
+    queue="users.send_email_on_video_created",
+    routing_key="videos.created"
+)
+```
+
+The [`queue`](#queues) will receive the messages when its `routing_key` matches the `binding_key` of the [`exchange`](#exchanges).
+
+<a name=producers></a>
+### Producers
+
+> They are the services that publish messages to the [`exchanges`](#exchanges).
+
+Producers are intended to be long-lived and open their connections on startup.
+
+To publish an event we need to create an [`exchange`](#exchanges), we can't send a message directly to a [`queue`](#queues).
+1. Declare the [`exchange`](#exchanges) they want to publish the message to (same steps as in the [exchanges](#exchanges) section):
+    
+    ```python
+    channel.exchange_declare(
+        exchange="videos",
+        exchange_type="topic"
+    )
+    ```
+
+2. Publish the message specifying the `exchange`(name) and the `routing_key` arguments if it's declared of type `topic` or `direct`. This
+routing key should have the same name as the [`binding_key`](#bindings) of the [`queue`](#queues) that will receive the message.
+
+    ```python
+    channel.basic_publish(
+        exchange="videos",
+        routing_key="videos.created",
+        body="Video Created!"
+    )
+    ```
+
+    If we want to ensure that the event survives a server restart, we need to set the `delivery_mode` to `Persistent`:
+    
+    ```python
+    import pika
+    
+    channel.basic_publish(
+        exchange="videos",
+        routing_key="videos.created",
+        body="Video Created!",
+        properties=pika.BasicProperties(
+            delivery_mode=pika.DeliveryMode.Persistent
+        )
+    )
+    ```
+
+<a name=consumers></a>
+### Consumers
+
+> They are the services that consume the messages from the [`queues`](#queues).
+
+Consumers are intended to be long-lived and open their connections on startup. We will say that a consumer is subscribed to a queue
+when it starts consuming messages from it.
+
+All consumers need to:
+1. Define the [`queue`](#queues) they want to consume messages from. Additionally, they can define the [`exchange`](#exchanges) 
+the queue will be subscribed to. As creating a [`queue`](#queues), this is an idempotent operation, so we will create just one exchange.
+
+    ```python
+    channel.exchange_declare(
+        exchange="videos",
+        exchange_type="topic"
+    )
+    channel.queue_declare(
+        queue="users.send_email_on_video_created",
+        durable=True,
+        exclusive=True
+    )
+    ```
+
+2. [Bind](#bindings) that [`queue`](#queues) to the [`exchange`](#exchanges) with the `routing_key`.
+
+    ```python
+    channel.queue_bind(
+        exchange="videos",
+        queue="users.send_email_on_video_created",
+        routing_key="videos.created"
+    )
+    ```
+   
+3. Define a callback function that will be called when a message is received. This function will be responsible for
+processing the message.
+
+    ```python
+    from pika.channel import Channel
+    from pika.spec import BasicProperties, Basic
+    
+    def callback(channel: Channel, method: Basic.Deliver, properties: BasicProperties, body: bytes):
+        print(f"[x] Received {method.routing_key}: {body.decode()}")
+    ```
+   
+    To ensure that the message is not lost if the consumer crashes it's recommended to add a manual message acknowledgment in the callback:
+        
+    ```python
+    from pika.channel import Channel
+    from pika.spec import BasicProperties, Basic
+   
+    def callback(channel: Channel, method: Basic.Deliver, properties: BasicProperties, body: bytes):
+        print(f"[x] Received {method.routing_key}: {body.decode()}")
+        channel.basic_ack(delivery_tag=method.delivery_tag)
+    ```
+
+4. Start consuming messages by subscribing to the queue.
+
+    ```python
+    channel.basic_consume(
+        queue="users.send_email_on_video_created",
+        on_message_callback=callback,
+        auto_ack=False  # Set to True if you want to automatically acknowledge the message
+    )
+    channel.start_consuming()
+    ```
+   
+    When consuming, we can configure the [`queue`](#queues) to not send a new message to the consumer until it has processed and
+    acknowledged the previous one. This is called _fair dispatch_ and can be set as follows:
+    
+    ```python
+    channel.basic_qos(prefetch_count=1)
+    ```
+</details>
+
+<details><summary>How is applied in the project</summary>
+
+</details>
