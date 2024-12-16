@@ -4,5 +4,5 @@ from tests.contexts.shared.domain.random_generator import RandomGenerator
 
 class VideoIdMother:
     @classmethod
-    def create(cls) -> VideoId:
-        return VideoId(RandomGenerator.uuid())
+    def create(cls, value: str | None = None) -> VideoId:
+        return VideoId(value if value else RandomGenerator.uuid())
