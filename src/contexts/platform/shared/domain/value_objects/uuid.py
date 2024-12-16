@@ -1,4 +1,4 @@
-from uuid import UUID
+from uuid import UUID, uuid4
 
 from src.contexts.platform.shared.domain.exceptions.required_value_error import (
     RequiredValueError,
@@ -16,3 +16,7 @@ class Uuid(ValueObject[str]):
         if value is None:
             raise RequiredValueError
         UUID(value)
+
+    @classmethod
+    def generate(cls) -> str:
+        return str(uuid4())
