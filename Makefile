@@ -23,11 +23,15 @@ all-unit:
 
 .PHONY: all-integration
 all-integration:
-	pdm run pytest -m "integration"
+	$(MAKE) up && sleep 2
+	pdm run pytest -m "integration" || ($(MAKE) down && exit 1)
+	$(MAKE) down
 
 .PHONY: all-acceptance
 all-acceptance:
-	pdm run pytest -m "acceptance"
+	$(MAKE) up && sleep 2
+	pdm run pytest -m "acceptance" || ($(MAKE) down && exit 1)
+	$(MAKE) down
 
 .PHONY: coverage
 coverage:
