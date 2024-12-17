@@ -26,8 +26,8 @@ jobs:
           make check-typing
       - name: Tests
         run: |
-          docker compose up -d postgres
+          make up
           make test
-          docker compose down --rmi all --volumes --remove-orphans
+          make down
         env:
           COMPOSE_FILE: docker-compose.yml
