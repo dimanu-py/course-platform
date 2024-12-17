@@ -10,3 +10,7 @@ class VideoCommentCreatedDomainEvent(DomainEvent):
     author_id: str
     title: str
     content: str
+
+    @property
+    def name(self) -> str:
+        return "dimanu.platform.event.video_comment.created"
