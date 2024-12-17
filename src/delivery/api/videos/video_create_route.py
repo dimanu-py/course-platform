@@ -19,7 +19,7 @@ router = APIRouter(prefix="/videos", tags=["Videos"])
 
 def creator_provider() -> VideoCreator:
     session_maker = SessionMaker(
-        url="postgresql://admin:admin@localhost:5432/influencer-platform"
+        url="postgresql://admin:admin@localhost:5432/course-platform"
     )
     repository = PostgresVideoRepository(session_maker=session_maker)
     event_bus = EventBus()

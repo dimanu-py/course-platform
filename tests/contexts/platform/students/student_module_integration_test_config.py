@@ -23,7 +23,7 @@ class StudentModuleIntegrationTestConfig:
     def setup_method(self) -> None:
         self.in_memory_student_repository = InMemoryStudentRepository()
         self.session_maker = SessionMaker(
-            "postgresql://admin:admin@localhost:5432/influencer-platform"
+            "postgresql://admin:admin@localhost:5432/course-platform"
         )
         self.session_maker.create_tables()
         self.postgres_student_repository = PostgresStudentRepository(self.session_maker)
