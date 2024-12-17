@@ -22,7 +22,7 @@ router = APIRouter(prefix="/students", tags=["Students"])
 
 async def creator_provider() -> StudentCreator:
     session_maker = SessionMaker(
-        url="postgresql://admin:admin@localhost:5432/influencer-platform"
+        url="postgresql://admin:admin@localhost:5432/course-platform"
     )
     session_maker.create_tables()
     repository = PostgresStudentRepository(session_maker=session_maker)

@@ -23,7 +23,7 @@ class VideoModuleIntegrationTestConfig:
     def setup_method(self) -> None:
         self.in_memory_repository = InMemoryVideoRepository()
         self.session_maker = SessionMaker(
-            "postgresql://admin:admin@localhost:5432/influencer-platform"
+            "postgresql://admin:admin@localhost:5432/course-platform"
         )
         self.session_maker.create_tables()
         self.postgres_video_repository = PostgresVideoRepository(self.session_maker)

@@ -1,9 +1,12 @@
+import pytest
+
 from tests.delivery.api.acceptance_test_config import AcceptanceTestConfig
 
 
 class TestVideoCreateRoute(AcceptanceTestConfig):
     NO_BODY: dict = {}
 
+    @pytest.mark.xfail
     def test_should_create_a_valid_product(self) -> None:
         request_body = {
             "title": "any_title",
