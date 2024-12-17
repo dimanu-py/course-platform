@@ -8,3 +8,7 @@ class VideoCreatedDomainEvent(DomainEvent):
     id: str
     title: str
     description: str
+
+    @property
+    def name(self) -> str:
+        return "dimanu.platform.event.video.created"
