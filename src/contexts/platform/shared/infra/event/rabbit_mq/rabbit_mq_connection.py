@@ -1,6 +1,12 @@
+import json
+
 import pika
 from pika.adapters.blocking_connection import BlockingChannel
 
+from src.contexts.platform.shared.domain.event.domain_event import DomainEvent
+from src.contexts.platform.shared.domain.exceptions.rabbit_mq_connection_not_established_error import (
+    RabbitMqConnectionNotEstablishedError,
+)
 from src.contexts.platform.shared.infra.event.rabbit_mq.rabbit_mq_settings import (
     RabbitMqSettings,
 )
@@ -28,3 +34,20 @@ class RabbitMqConnection:
             )
         )
         self._channel = self._connection.channel()
+
+    def create_exchange(self, name: str) -> None:
+        self._ensure_channel_exists()
+        self._channel.exchange_declare(exchange=name, exchange_type="topic")  # type: ignore
+
+    def publish(self, event: DomainEvent, exchange: str) -> None:
+        self._ensure_channel_exists()
+        self._channel.basic_publish(  # type: ignore
+            exchange=exchange,
+            routing_key=event.name,
+            body=json.dumps(event.serialize()),
+            properties=pika.BasicProperties(delivery_mode=pika.DeliveryMode.Persistent),
+        )
+
+    def _ensure_channel_exists(self) -> None:
+        if self._channel is None:
+            raise RabbitMqConnectionNotEstablishedError
