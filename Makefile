@@ -86,3 +86,11 @@ watch:
 .PHONY: create-aggregate
 create-aggregate:
 	pdm run python -m scripts.create_aggregate
+
+.PHONY: up
+up: ## Start docker containers
+	docker compose up --build -d
+
+.PHONY: down
+down: ## Stop docker containers
+	docker compose down -v --remove-orphans
