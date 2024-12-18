@@ -1,6 +1,9 @@
 from fastapi import APIRouter, status, Depends
 from fastapi.responses import JSONResponse
 
+from src.contexts.platform.shared.infra.persistence.sqlalchemy.session_maker import (
+    SessionMaker,
+)
 from src.contexts.platform.students.application.create.create_student_command import (
     CreateStudentCommand,
 )
@@ -10,9 +13,7 @@ from src.contexts.platform.students.application.create.student_creator import (
 from src.contexts.platform.students.infra.persistence.postgres_student_repository import (
     PostgresStudentRepository,
 )
-from src.contexts.platform.shared.infra.persistence.sqlalchemy.session_maker import (
-    SessionMaker,
-)
+from src.delivery.api.dependency_provider import session_maker_provider
 from src.delivery.api.students.student_create_request import (
     CreateStudentRequest,
 )
@@ -20,10 +21,9 @@ from src.delivery.api.students.student_create_request import (
 router = APIRouter(prefix="/students", tags=["Students"])
 
 
-async def creator_provider() -> StudentCreator:
-    session_maker = SessionMaker(
-        url="postgresql://admin:admin@localhost:5432/course-platform"
-    )
+async def creator_provider(
+    session_maker: SessionMaker = Depends(session_maker_provider),
+) -> StudentCreator:
     session_maker.create_tables()
     repository = PostgresStudentRepository(session_maker=session_maker)
     return StudentCreator(repository=repository)
