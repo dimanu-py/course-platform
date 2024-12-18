@@ -1,3 +1,6 @@
+from src.contexts.platform.video_comments_counter.domain.video_comment_counter import (
+    VideoCommentCounter,
+)
 from src.contexts.platform.video_comments_counter.domain.video_comment_counter_repository import (
     VideoCommentCounterRepository,
 )
@@ -12,5 +15,7 @@ class CommentsCounterIncrementer:
 
     def __call__(self, video_id: str) -> None:
         counter = self._repository.search(VideoId(video_id))
+        if counter is None:
+            counter = VideoCommentCounter.initialize(video_id=video_id)
         counter.increment()
         self._repository.save(counter)

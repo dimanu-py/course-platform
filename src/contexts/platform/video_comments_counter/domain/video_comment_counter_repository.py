@@ -12,5 +12,5 @@ class VideoCommentCounterRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def search(self, video_id: VideoId) -> VideoCommentCounter:
+    def search(self, video_id: VideoId) -> VideoCommentCounter | None:
         raise NotImplementedError

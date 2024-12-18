@@ -32,6 +32,16 @@ class VideoCommentCounter:
             number_comments=VideoCommentTotal.initialize(),
         )
 
+    @classmethod
+    def from_primitives(
+        cls, id_: str, video_id: str, comments_count: int
+    ) -> "VideoCommentCounter":
+        return VideoCommentCounter(
+            id_=VideoCommentCounterId(id_),
+            video_id=VideoId(video_id),
+            number_comments=VideoCommentTotal(comments_count),
+        )
+
     @override
     def __eq__(self, other: "VideoCommentCounter") -> bool:
         return self._id == other._id
@@ -46,3 +56,10 @@ class VideoCommentCounter:
 
     def increment(self) -> None:
         self._number_comments.increment()
+
+    def to_dict(self) -> dict:
+        return {
+            "id": self._id.value,
+            "video_id": self._video_id.value,
+            "comments_count": self._number_comments.value,
+        }
