@@ -54,6 +54,10 @@ class VideoCommentCounter:
     def video_id(self) -> VideoId:
         return self._video_id
 
+    @property
+    def number_comments(self) -> VideoCommentTotal:
+        return self._number_comments
+
     def increment(self) -> None:
         self._number_comments.increment()
 

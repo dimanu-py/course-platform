@@ -14,8 +14,8 @@ class VideoCommentCounterFinder:
     def __init__(self, repository: VideoCommentCounterRepository) -> None:
         self._repository = repository
 
-    def __call__(self, query: FindVideoCommentCounterQuery) -> VideoCommentCounter:
+    def __call__(self, query: FindVideoCommentCounterQuery) -> int:
         counter = self._repository.search(VideoId(query.video_id))
         if not counter:
             counter = VideoCommentCounter.initialize(video_id=query.video_id)
-        return counter
+        return counter.number_comments.value
