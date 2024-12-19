@@ -1,5 +1,3 @@
-import pytest
-
 from src.contexts.platform.shared.domain.event.domain_event import DomainEvent
 from src.contexts.platform.shared.infra.event.rabbit_mq.rabbit_mq_connection import (
     RabbitMqConnection,
@@ -25,10 +23,9 @@ class TestVideoCommentsCounterRoute(AcceptanceTestConfig):
                     user="admin", password="admin", host="localhost"
                 )
             ),
-            exchange_name="domain_events",
+            exchange_name="comments_events",
         )
 
-    @pytest.mark.xfail
     def test_should_get_comments_counter(self) -> None:
         event = VideoCommentCreatedDomainEventMother.create()
         self.given_a_event_is_published([event])

@@ -1,15 +1,15 @@
 from abc import ABC, abstractmethod
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass, asdict
 
 
 @dataclass(frozen=True, kw_only=True)
 class DomainEvent(ABC):
-    @property
+    id: str
+
+    @classmethod
     @abstractmethod
-    def name(self) -> str:
+    def name(cls) -> str:
         raise NotImplementedError
 
-    def serialize(self) -> dict:
-        event_fields = asdict(self)
-        event_fields["name"] = self.name
-        return event_fields
+    def to_dict(self) -> dict:
+        return asdict(self)

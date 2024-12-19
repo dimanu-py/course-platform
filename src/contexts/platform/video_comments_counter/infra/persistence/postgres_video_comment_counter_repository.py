@@ -32,4 +32,4 @@ class PostgresVideoCommentCounterRepository(
 
     @override
     def search(self, video_id: VideoId) -> VideoCommentCounter | None:
-        return self.search_by_id(video_id)
+        return self.search_by_criteria(video_id)

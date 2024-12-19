@@ -5,7 +5,7 @@
 groups = ["default", "lint", "test"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:ed1e38d90a17b71fe588528222d4b433525619469e6f3125dc3f557cbfc4ee96"
+content_hash = "sha256:f9ff1b8e4e822a2688af71a47fd82a67b6bd1ac2c31a03be8feac25c1c46f32f"
 
 [[metadata.targets]]
 requires_python = "==3.12.*"
@@ -880,7 +880,7 @@ files = [
 
 [[package]]
 name = "typer"
-version = "0.15.0"
+version = "0.15.1"
 requires_python = ">=3.7"
 summary = "Typer, build great CLIs. Easy to code. Based on Python type hints."
 groups = ["default"]
@@ -891,8 +891,8 @@ dependencies = [
     "typing-extensions>=3.7.4.3",
 ]
 files = [
-    {file = "typer-0.15.0-py3-none-any.whl", hash = "sha256:bd16241db7e0f989ce1a0d8faa5aa1e43b9b9ac3fd1d4b8bcff91503d6717e38"},
-    {file = "typer-0.15.0.tar.gz", hash = "sha256:8995452a598922ed8d8ad8c06ca63a218881ab601f5fa6fb0c511f7776497c7e"},
+    {file = "typer-0.15.1-py3-none-any.whl", hash = "sha256:7994fb7b8155b64d3402518560648446072864beefd44aa2dc36972a5972e847"},
+    {file = "typer-0.15.1.tar.gz", hash = "sha256:a0588c0a7fa68a1978a069818657778f86abe6ff5ea6abf472f940a08bfe4f0a"},
 ]
 
 [[package]]

@@ -59,7 +59,7 @@ class VideoCommentCounter:
         return self._number_comments
 
     def increment(self) -> None:
-        self._number_comments.increment()
+        self._number_comments = self._number_comments.increment()
 
     def to_dict(self) -> dict:
         return {

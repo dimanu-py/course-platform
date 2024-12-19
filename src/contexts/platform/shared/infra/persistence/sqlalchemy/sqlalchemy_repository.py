@@ -31,3 +31,12 @@ class SqlAlchemyRepository[Model: Base]:
                 .first()
             )
             return entity_model.to_aggregate() if entity_model else None
+
+    def search_by_criteria(self, video_id: Uuid) -> Entity | None:
+        with self._session_maker.get_session() as session:
+            entity_model = (
+                session.query(self._model_class)
+                .filter(self._model_class.video_id == video_id.value)
+                .first()
+            )
+            return entity_model.to_aggregate() if entity_model else None

@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import override
 
 from src.contexts.platform.shared.domain.event.domain_event import DomainEvent
 
@@ -11,6 +12,7 @@ class VideoCommentCreatedDomainEvent(DomainEvent):
     title: str
     content: str
 
-    @property
-    def name(self) -> str:
+    @classmethod
+    @override
+    def name(cls) -> str:
         return "dimanu.platform.event.video_comment.created"
