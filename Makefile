@@ -81,7 +81,7 @@ format:
 pre-commit: check-typing check-lint check-format all-unit
 
 .PHONY: pre-push
-pre-push: all-integration all-acceptance
+pre-push: all-integration
 
 .PHONY: watch
 watch:

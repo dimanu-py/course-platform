@@ -30,7 +30,6 @@ def creator_provider(
     session_maker: SessionMaker = Depends(session_maker_provider),
     rabbit_mq_client: RabbitMqConnection = Depends(rabbit_mq_connection_provider),
 ) -> VideoCreator:
-    session_maker.create_tables()
     repository = PostgresVideoRepository(session_maker=session_maker)
     event_bus = RabbitMqEventBus(client=rabbit_mq_client, exchange_name="videos")
     session_maker.create_tables()

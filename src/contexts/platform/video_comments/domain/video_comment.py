@@ -2,6 +2,7 @@ from typing import override
 
 from src.contexts.platform.shared.domain.aggregate_root import AggregateRoot
 from src.contexts.platform.students.domain.student_id import StudentId
+from src.contexts.platform.video_comments.domain.video_comment_content import VideoCommentContent
 from src.contexts.platform.video_comments.domain.video_comment_created_domain_event import (
     VideoCommentCreatedDomainEvent,
 )
@@ -13,7 +14,7 @@ from src.contexts.platform.videos.domain.video_id import VideoId
 
 
 class VideoComment(AggregateRoot):
-    _content: VideoCommentTitle
+    _content: VideoCommentContent
     _title: VideoCommentTitle
     _author_id: StudentId
     _video_id: VideoId
@@ -25,7 +26,7 @@ class VideoComment(AggregateRoot):
         video_id: VideoId,
         author_id: StudentId,
         title: VideoCommentTitle,
-        content: VideoCommentTitle,
+        content: VideoCommentContent,
     ) -> None:
         super().__init__()
         self._id = id_
@@ -43,7 +44,7 @@ class VideoComment(AggregateRoot):
             video_id=VideoId(video_id),
             author_id=StudentId(author_id),
             title=VideoCommentTitle(title),
-            content=VideoCommentTitle(content),
+            content=VideoCommentContent(content),
         )
 
         video_comment.record(
